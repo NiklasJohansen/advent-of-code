@@ -4,9 +4,9 @@ fun main() {
     println("D2P2: ${day2Part2()}")
 }
 
-fun day2Part1() = readLines("day2.txt").sumOf { getShapeScore(it) + getRoundScore(it) }
+fun day2Part1() = readLines("day02.txt").sumOf { getShapeScore(it) + getRoundScore(it) }
 
-fun day2Part2() = readLines("day2.txt").sumOf { getShapeScore2(it) + getRoundScore2(it) }
+fun day2Part2() = readLines("day02.txt").sumOf { getShapeScore2(it) + getRoundScore2(it) }
 
 private fun getShapeScore(round: String) = when (round[2]) {
     'X' -> 1 // Rock

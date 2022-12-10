@@ -4,10 +4,10 @@ fun main() {
     println("D1P2: ${day1Part2()}")
 }
 
-fun day1Part1() = readLines("day1.txt", delimiter = "\n\n")
+fun day1Part1() = readLines("day01.txt", delimiter = "\n\n")
     .maxOf { it.sumLines() }
 
-fun day1Part2() = readLines("day1.txt", delimiter = "\n\n")
+fun day1Part2() = readLines("day01.txt", delimiter = "\n\n")
     .map { it.sumLines()}
     .sortedDescending()
     .take(3)

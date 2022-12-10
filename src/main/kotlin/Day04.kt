@@ -4,13 +4,13 @@ fun main() {
     println("D4P2: ${day4Part2()}")
 }
 
-fun day4Part1() = readLines("day4.txt")
+fun day4Part1() = readLines("day04.txt")
     .count { line ->
         val (a, b) = line.toPairs()
         a.contains(b) || b.contains(a)
     }
 
-fun day4Part2() = readLines("day4.txt")
+fun day4Part2() = readLines("day04.txt")
     .count { line ->
         val (a, b) = line.toPairs()
         a.overlaps(b)

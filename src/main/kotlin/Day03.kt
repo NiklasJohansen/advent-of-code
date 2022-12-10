@@ -4,14 +4,14 @@ fun main() {
     println("D3P2: ${day3Part2()}")
 }
 
-fun day3Part1() = readLines("day3_1.txt")
+fun day3Part1() = readLines("day03-1.txt")
     .sumOf { rucksacks ->
         val (compartment1, compartment2) = rucksacks.chunked(rucksacks.length / 2)
         val duplicateItem = compartment1.find { item -> compartment2.any { it == item } }
         duplicateItem!!.getPriority()
     }
 
-fun day3Part2() = readLines("day3_2.txt")
+fun day3Part2() = readLines("day03-2.txt")
     .chunked(3)
     .sumOf { rucksacks ->
         val badge = rucksacks[0].find { item ->

@@ -6,18 +6,18 @@ fun main() {
 
 fun day7Part1(): Long {
     val folderSizes = mutableMapOf<String, Long>()
-    readLines("day7.txt").unwrapToPaths().getFolderSizes(folderSizes)
+    readLines("day07.txt").unwrapToPaths().getFolderSizes(folderSizes)
     return folderSizes.values.sumOf { if (it <= 100000) it else 0 }
 }
 
 fun day7Part2(): Long {
     val folderSizes = mutableMapOf<String, Long>()
-    val paths = readLines("day7.txt").unwrapToPaths()
+    val paths = readLines("day07.txt").unwrapToPaths()
     val usedSpace = paths.getFolderSizes(folderSizes)
     return folderSizes.filter { (70000000 - usedSpace + it.value) >= 30000000 }.minOf { it.value }
 }
 
-fun List<String>.unwrapToPaths(): MutableMap<String, Int> {
+private fun List<String>.unwrapToPaths(): MutableMap<String, Int> {
     val paths = mutableMapOf<String, Int>()
     var path = ""
     for (line in this) {
@@ -35,7 +35,7 @@ fun List<String>.unwrapToPaths(): MutableMap<String, Int> {
     return paths
 }
 
-fun MutableMap<String, Int>.getFolderSizes(folderSizes: MutableMap<String, Long>, basePath: String = ""): Long {
+private fun MutableMap<String, Int>.getFolderSizes(folderSizes: MutableMap<String, Long>, basePath: String = ""): Long {
     var folderSize = 0L
     for ((filePath, size) in this) {
         if (!filePath.startsWith(basePath))
