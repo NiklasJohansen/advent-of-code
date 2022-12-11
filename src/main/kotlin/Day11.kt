@@ -5,19 +5,21 @@ fun main() {
 
 fun day11Part1() = readLines("day11.txt", delimiter = "\n\n")
     .map { Monkey.from(it) }
-    .performMonkeyBusiness(rounds = 20, divideWorryLevel = true)
+    .performMonkeyBusiness(rounds = 20, divideWorryLevel = true, limitRange = false)
 
 fun day11Part2() = readLines("day11.txt", delimiter = "\n\n")
     .map { Monkey.from(it) }
-    .performMonkeyBusiness(rounds = 10000, divideWorryLevel = false)
+    .performMonkeyBusiness(rounds = 10000, divideWorryLevel = false, limitRange = true)
 
-private fun List<Monkey>.performMonkeyBusiness(rounds: Int, divideWorryLevel: Boolean): Long {
+private fun List<Monkey>.performMonkeyBusiness(rounds: Int, divideWorryLevel: Boolean, limitRange: Boolean): Long {
     val lcm = this.map { it.divider }.reduce { acc, divider -> acc * divider }
     repeat(rounds) {
         for (monkey in this) {
             for (item in monkey.items) {
                 monkey.itemsInspected++
-                monkey.operation.performOn(item, lcm)
+                monkey.operation.performOn(item)
+                if (limitRange)
+                    item.worryLevel %= lcm
                 if (divideWorryLevel)
                     item.worryLevel /= 3
                 val targetMonkey = if (item.worryLevel % monkey.divider == 0L) monkey.trueMonkey else monkey.falseMonkey
@@ -34,10 +36,8 @@ private data class Item(var worryLevel: Long)
 
 private data class Operation(val operator: String, val value: Long?) {
     fun getValue(item: Item) = value ?: item.worryLevel
-    fun performOn(item: Item, lcm: Long) {
+    fun performOn(item: Item) =
         if (operator == "*") item.worryLevel *= getValue(item) else item.worryLevel += getValue(item)
-        item.worryLevel %= lcm // Keep the values in a manageable range
-    }
 }
 
 private data class Monkey(
