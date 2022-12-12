@@ -27,12 +27,11 @@ fun List<String>.getShortestPathLength(xStart: Int, yStart: Int, xEnd: Int, yEnd
     val mapWidth = this[0].length
     val mapHeight = this.size
     val visited = BooleanArray(mapWidth * mapHeight)
-    val squares = ArrayDeque<Square>().apply { add(Square(xStart, yStart, 0)) }
+    val cells = ArrayDeque<Cell>().apply { add(Cell(xStart, yStart, 0)) }
 
     // Perform breadth first search
-    while (squares.isNotEmpty()) {
-        val cell = squares.removeFirst()
-
+    while (cells.isNotEmpty()) {
+        val cell = cells.removeFirst()
         if (cell.x == xEnd && cell.y == yEnd)
             return cell.pathLength // Found destination!
 
@@ -43,9 +42,8 @@ fun List<String>.getShortestPathLength(xStart: Int, yStart: Int, xEnd: Int, yEnd
             val (xDir, yDir) = dir
             val x = cell.x + xDir
             val y = cell.y + yDir
-            if (x >= 0 && x < mapWidth && y >= 0 && y < mapHeight && this[y][x] - this[cell.y][cell.x] <= 1) {
-                squares.add(Square(x, y, cell.pathLength + 1))
-            }
+            if (x >= 0 && x < mapWidth && y >= 0 && y < mapHeight && this[y][x] - this[cell.y][cell.x] <= 1)
+                cells.add(Cell(x, y, cell.pathLength + 1))
         }
 
         visited[cell.y * mapWidth + cell.x] = true
@@ -63,7 +61,7 @@ private fun List<String>.getPositionOf(c: Char): Pair<Int, Int> {
 private fun List<String>.removeStartAndStopPoints(): List<String> =
     this.map { it.replace('S', 'a').replace('E', 'z') }
 
-private class Square(val x: Int, val y: Int, var pathLength: Int)
+private class Cell(val x: Int, val y: Int, var pathLength: Int)
 
 private val directions = listOf(
     Pair(1, 0),
