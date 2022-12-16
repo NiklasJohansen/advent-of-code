@@ -3,8 +3,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 fun main() {
-    println("D15P1: ${day15Part1() == 5147333}")
-    println("D15P2: ${day15Part2() == 13734006908372L}")
+    println("D15P1: ${day15Part1()}")
+    println("D15P2: ${day15Part2()}")
 }
 
 fun day15Part1() = readLines("day15.txt")

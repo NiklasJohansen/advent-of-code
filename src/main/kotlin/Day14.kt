@@ -7,11 +7,11 @@ fun main() {
 
 fun day14Part1() = readLines("day14.txt", delimiter = "\n")
     .parseMap()
-    .simulate(xSpawn = 500, ySpawn = 0, enableFloor = false, stopWhen = { floorLevel, sand -> sand.y > floorLevel })
+    .simulate(enableFloor = false, stopWhen = { floorLevel, sand -> sand.y > floorLevel })
 
 fun day14Part2() = readLines("day14.txt", delimiter = "\n")
     .parseMap()
-    .simulate(xSpawn = 500, ySpawn = 0, enableFloor = true, stopWhen = { _, sand -> sand.x == 500 && sand.y == 0 })
+    .simulate(enableFloor = true, stopWhen = { _, sand -> sand.x == 500 && sand.y == 0 })
 
 private fun List<String>.parseMap(): MutableMap<Position, Block> {
     val map = mutableMapOf<Position, Block>()
@@ -29,23 +29,21 @@ private fun List<String>.parseMap(): MutableMap<Position, Block> {
 }
 
 private fun MutableMap<Position, Block>.simulate(
-    xSpawn: Int,
-    ySpawn: Int,
     enableFloor: Boolean,
     stopWhen: (floorLevel: Int, sand: Position) -> Boolean
 ): Int {
     val floorLevel = this.keys.maxOf { it.y } + if (enableFloor) 2 else 0
 
     while (true) {
-        val sand = Position(xSpawn, ySpawn)
+        val sand = Position(500, 0)
         var simulate = true
         while (simulate) {
             if (enableFloor && sand.y + 1 == floorLevel) {
                 this[sand] = SAND
                 simulate = false
-            } else if (isSpaceDown(sand))
+            } else if (isSpaceDown(sand)) {
                 sand.y++
-            else if (isSpaceDownLeft(sand)) {
+            } else if (isSpaceDownLeft(sand)) {
                 sand.x--
                 sand.y++
             } else if (isSpaceDownRight(sand)) {
