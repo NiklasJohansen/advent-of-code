@@ -1,14 +1,17 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D19P1: ${day19Part1()}")
     println("D19P2: ${day19Part2()}")
 }
 
-fun day19Part1() = readLines("day19.txt")
+fun day19Part1() = readLines("aoc2022/day19.txt")
     .map { Blueprint.from(it) }
     .sumOf { blueprint -> blueprint.id * getMaxNumberOfGeodes(blueprint, totalMinutes = 24) }
 
-fun day19Part2() = readLines("day19.txt")
+fun day19Part2() = readLines("aoc2022/day19.txt")
     .take(3)
     .map { getMaxNumberOfGeodes(blueprint = Blueprint.from(it), totalMinutes = 32) }
     .reduce(Int::times)
