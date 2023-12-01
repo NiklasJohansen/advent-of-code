@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 import java.util.*
 
 fun main() {
@@ -5,11 +8,11 @@ fun main() {
     println("D17P2: ${day17Part2()}")
 }
 
-fun day17Part1() = readLines("day17.txt")
+fun day17Part1() = readLines("aoc2022/day17.txt")
     .getWinds()
     .getTowerHeight(totalRocks = 2023L)
 
-fun day17Part2() = readLines("day17.txt")
+fun day17Part2() = readLines("aoc2022/day17.txt")
     .getWinds()
     .getTowerHeight(totalRocks = 1_000_000_000_001L)
 
@@ -66,7 +69,7 @@ fun List<Long>.getTowerHeight(totalRocks: Long): Long {
                 val heightJump = heightDelta * rockNumToJump
                 rockCount += rockNumDelta * rockNumToJump
                 yStart += heightJump
-                val newMap = rockMap.map { Pos(it.x, it.y + heightJump)}
+                val newMap = rockMap.map { Pos(it.x, it.y + heightJump) }
                 rockMap.clear()
                 rockMap.addAll(newMap)
             }
@@ -79,7 +82,7 @@ fun List<Long>.getTowerHeight(totalRocks: Long): Long {
     return -1
 }
 
-private fun MutableSet<Pos>.insert( pos: Pos, shape: List<String>) {
+private fun MutableSet<Pos>.insert(pos: Pos, shape: List<String>) {
     for (y in 0 until shape.size) {
         for (x in 0 until shape[0].length) {
             if (shape[y][x] == '#')

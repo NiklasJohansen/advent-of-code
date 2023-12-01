@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -7,12 +10,12 @@ fun main() {
     println("D15P2: ${day15Part2()}")
 }
 
-fun day15Part1() = readLines("day15.txt")
+fun day15Part1() = readLines("aoc2022/day15.txt")
     .parseMap()
     .get(2000000)!!
     .sumOf { it.xMax - it.xMin + 1 } - 1 // Subtract 1 to account for the one beacon inside the area
 
-fun day15Part2() = readLines("day15.txt")
+fun day15Part2() = readLines("aoc2022/day15.txt")
     .parseMap()
     .findTuningFrequencyOfBeacon()
 

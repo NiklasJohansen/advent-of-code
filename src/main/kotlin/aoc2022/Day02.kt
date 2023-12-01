@@ -1,12 +1,15 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D2P1: ${day2Part1()}")
     println("D2P2: ${day2Part2()}")
 }
 
-fun day2Part1() = readLines("day02.txt").sumOf { getShapeScore(it) + getRoundScore(it) }
+fun day2Part1() = readLines("aoc2022/day02.txt").sumOf { getShapeScore(it) + getRoundScore(it) }
 
-fun day2Part2() = readLines("day02.txt").sumOf { getShapeScore2(it) + getRoundScore2(it) }
+fun day2Part2() = readLines("aoc2022/day02.txt").sumOf { getShapeScore2(it) + getRoundScore2(it) }
 
 private fun getShapeScore(round: String) = when (round[2]) {
     'X' -> 1 // Rock

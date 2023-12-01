@@ -1,16 +1,19 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D4P1: ${day4Part1()}")
     println("D4P2: ${day4Part2()}")
 }
 
-fun day4Part1() = readLines("day04.txt")
+fun day4Part1() = readLines("aoc2022/day04.txt")
     .count { line ->
         val (a, b) = line.toPairs()
         a.contains(b) || b.contains(a)
     }
 
-fun day4Part2() = readLines("day04.txt")
+fun day4Part2() = readLines("aoc2022/day04.txt")
     .count { line ->
         val (a, b) = line.toPairs()
         a.overlaps(b)

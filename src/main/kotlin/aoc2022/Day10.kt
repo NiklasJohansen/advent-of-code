@@ -1,12 +1,15 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D10P1: ${day10Part1()}")
     println("D10P2: ${day10Part2()}")
 }
 
-fun day10Part1() = getSignalStrengthSum(readLines("day10.txt"))
+fun day10Part1() = getSignalStrengthSum(readLines("aoc2022/day10.txt"))
 
-fun day10Part2() = getCrtImage(readLines("day10.txt"))
+fun day10Part2() = getCrtImage(readLines("aoc2022/day10.txt"))
 
 private fun getSignalStrengthSum(instructions: List<String>): Int {
     var signalStrengthSum = 0

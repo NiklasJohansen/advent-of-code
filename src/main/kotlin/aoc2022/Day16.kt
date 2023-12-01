@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D16P1: ${day16Part1()}")
@@ -5,7 +8,7 @@ fun main() {
 }
 
 fun day16Part1(): Int {
-    val valves = readLines("day16.txt").parseValves()
+    val valves = readLines("aoc2022/day16.txt").parseValves()
     val startValve = valves.first { it.name == "AA" }
     val shortestValvePaths = valves.getShortestPathsBetweenWorkingValves(startValve)
     val pathsWithPressure = startValve.findHighestPressurePaths(shortestValvePaths, minutesLeft = 30)
@@ -13,7 +16,7 @@ fun day16Part1(): Int {
 }
 
 fun day16Part2(): Int {
-    val valves = readLines("day16.txt").parseValves()
+    val valves = readLines("aoc2022/day16.txt").parseValves()
     val startValve = valves.first { it.name == "AA" }
     val shortestValvePaths = valves.getShortestPathsBetweenWorkingValves(startValve)
     val pathsWithPressure = startValve.findHighestPressurePaths(shortestValvePaths, minutesLeft = 26)
@@ -84,7 +87,7 @@ private fun Valve.findHighestPressurePaths(
 
 private fun Map<String, Int>.findHighestPressureSumAmongstTwoSeparatePaths(): Int {
     val pathResults = this
-        .map { (path, pressure) -> PathResult(path.chunked(2).toSet(), pressure)}
+        .map { (path, pressure) -> PathResult(path.chunked(2).toSet(), pressure) }
         .sortedByDescending { it.totalPressure }
 
     var maxPressure = 0

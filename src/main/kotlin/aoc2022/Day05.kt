@@ -1,14 +1,17 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D5P1: ${day5Part1()}")
     println("D5P2: ${day5Part2()}")
 }
 
-fun day5Part1() = readStacksAndMoves("day05.txt")
+fun day5Part1() = readStacksAndMoves("aoc2022/day05.txt")
     .also { (stacks, moves) -> moves.forEach { it.executeOn(stacks) } }
     .let { (stacks, _) -> stacks.joinToString("") { it.first().toString() } }
 
-fun day5Part2() = readStacksAndMoves("day05.txt")
+fun day5Part2() = readStacksAndMoves("aoc2022/day05.txt")
     .also { (stacks, moves) -> moves.forEach { it.executeOn(stacks, retainMoveOrder = true) } }
     .let { (stacks, _) -> stacks.joinToString("") { it.first().toString() } }
 

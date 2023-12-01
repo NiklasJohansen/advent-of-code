@@ -1,5 +1,8 @@
-import Type.BLOCK
-import Type.WATER
+package aoc2022
+
+import aoc2022.Type.BLOCK
+import aoc2022.Type.WATER
+import readLines
 
 fun main() {
     println("D18P1: ${day18Part1()}")
@@ -7,12 +10,12 @@ fun main() {
 }
 
 fun day18Part1(): Int {
-    val cubes = readLines("day18.txt").getCubes()
+    val cubes = readLines("aoc2022/day18.txt").getCubes()
     return cubes.entries.sumOf { (pos, _) -> 6 - cubes.countNeighboursOfType(pos, BLOCK) }
 }
 
 fun day18Part2(): Int {
-    val cubes = readLines("day18.txt")
+    val cubes = readLines("aoc2022/day18.txt")
         .getCubes()
         .floodFillWith(WATER)
     return cubes.entries.filter { it.value == BLOCK }.sumOf { cubes.countNeighboursOfType(it.key, WATER) }

@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 import java.lang.Integer.min
 
 fun main() {
@@ -5,12 +8,12 @@ fun main() {
     println("D13P2: ${day13Part2()}")
 }
 
-fun day13Part1() = readLines("day13.txt", delimiter = "\n\n")
+fun day13Part1() = readLines("aoc2022/day13.txt", delimiter = "\n\n")
     .getPacketPairs()
     .mapIndexed { i, packetPair -> if (packetPair.isInRightOrder() == true) i + 1 else 0 }
     .sum()
 
-fun day13Part2() = readLines("day13.txt", delimiter = "\n")
+fun day13Part2() = readLines("aoc2022/day13.txt", delimiter = "\n")
     .filterNot { it.isBlank() }
     .plus(listOf("[[2]]", "[[6]]"))
     .map { it.toPacketList() }

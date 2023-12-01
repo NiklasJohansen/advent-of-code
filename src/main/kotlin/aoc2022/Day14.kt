@@ -1,15 +1,18 @@
-import Block.*
+package aoc2022
+
+import aoc2022.Block.*
+import readLines
 
 fun main() {
     println("D14P1: ${day14Part1()}")
     println("D14P2: ${day14Part2()}")
 }
 
-fun day14Part1() = readLines("day14.txt", delimiter = "\n")
+fun day14Part1() = readLines("aoc2022/day14.txt", delimiter = "\n")
     .parseMap()
     .simulate(enableFloor = false, stopWhen = { floorLevel, sand -> sand.y > floorLevel })
 
-fun day14Part2() = readLines("day14.txt", delimiter = "\n")
+fun day14Part2() = readLines("aoc2022/day14.txt", delimiter = "\n")
     .parseMap()
     .simulate(enableFloor = true, stopWhen = { _, sand -> sand.x == 500 && sand.y == 0 })
 

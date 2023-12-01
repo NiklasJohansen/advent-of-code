@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D7P1: ${day7Part1()}")
@@ -6,13 +9,13 @@ fun main() {
 
 fun day7Part1(): Long {
     val folderSizes = mutableMapOf<String, Long>()
-    readLines("day07.txt").unwrapToPaths().getFolderSizes(folderSizes)
+    readLines("aoc2022/day07.txt").unwrapToPaths().getFolderSizes(folderSizes)
     return folderSizes.values.sumOf { if (it <= 100000) it else 0 }
 }
 
 fun day7Part2(): Long {
     val folderSizes = mutableMapOf<String, Long>()
-    val paths = readLines("day07.txt").unwrapToPaths()
+    val paths = readLines("aoc2022/day07.txt").unwrapToPaths()
     val usedSpace = paths.getFolderSizes(folderSizes)
     return folderSizes.filter { (70000000 - usedSpace + it.value) >= 30000000 }.minOf { it.value }
 }

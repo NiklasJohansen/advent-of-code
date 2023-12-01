@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 import kotlin.math.abs
 import kotlin.math.sign
 
@@ -6,9 +9,9 @@ fun main() {
     println("D9P2: ${day9Part2()}")
 }
 
-fun day9Part1() = countVisitedPositions(moves = readLines("day09.txt"), nKnots = 2)
+fun day9Part1() = countVisitedPositions(moves = readLines("aoc2022/day09.txt"), nKnots = 2)
 
-fun day9Part2() = countVisitedPositions(moves = readLines("day09.txt"), nKnots = 10)
+fun day9Part2() = countVisitedPositions(moves = readLines("aoc2022/day09.txt"), nKnots = 10)
 
 private fun countVisitedPositions(moves: List<String>, nKnots: Int): Int {
     val visited = mutableSetOf("0:0")

@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 
 fun main() {
     println("D12P1: ${day12Part1()}")
@@ -5,7 +8,7 @@ fun main() {
 }
 
 fun day12Part1(): Int {
-    val lines = readLines("day12.txt", delimiter = "\n")
+    val lines = readLines("aoc2022/day12.txt", delimiter = "\n")
     val (xStart, yStart) = lines.getPositionOf('S')
     val (xEnd, yEnd) = lines.getPositionOf('E')
     val heightMap = lines.removeStartAndStopPoints()
@@ -13,7 +16,7 @@ fun day12Part1(): Int {
 }
 
 fun day12Part2(): Int {
-    val lines = readLines("day12.txt", delimiter = "\n")
+    val lines = readLines("aoc2022/day12.txt", delimiter = "\n")
     val (xEnd, yEnd) = lines.getPositionOf('E')
     val heightMap = lines.removeStartAndStopPoints()
     return lines.flatMapIndexed { yStart, row ->

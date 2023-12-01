@@ -1,13 +1,17 @@
+package aoc2022
+
+import readLines
+
 fun main() {
     println("D11P1: ${day11Part1()}")
     println("D11P2: ${day11Part2()}")
 }
 
-fun day11Part1() = readLines("day11.txt", delimiter = "\n\n")
+fun day11Part1() = readLines("aoc2022/day11.txt", delimiter = "\n\n")
     .map { Monkey.from(it) }
     .performMonkeyBusiness(rounds = 20, divideWorryLevel = true, limitRange = false)
 
-fun day11Part2() = readLines("day11.txt", delimiter = "\n\n")
+fun day11Part2() = readLines("aoc2022/day11.txt", delimiter = "\n\n")
     .map { Monkey.from(it) }
     .performMonkeyBusiness(rounds = 10000, divideWorryLevel = false, limitRange = true)
 

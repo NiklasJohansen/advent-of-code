@@ -1,3 +1,6 @@
+package aoc2022
+
+import readLines
 import kotlin.math.max
 
 fun main() {
@@ -5,7 +8,7 @@ fun main() {
     println("D8P2: ${day8Part2()}")
 }
 
-fun day8Part1() = readLines("day08.txt").let { map ->
+fun day8Part1() = readLines("aoc2022/day08.txt").let { map ->
     var count = 0
     for (y in 1 until map.lastIndex) {
         for (x in 1 until map[0].lastIndex) {
@@ -16,7 +19,7 @@ fun day8Part1() = readLines("day08.txt").let { map ->
     count + 2 * (map.size + map[0].length - 2)
 }
 
-fun day8Part2() = readLines("day08.txt").let { map ->
+fun day8Part2() = readLines("aoc2022/day08.txt").let { map ->
     var maxVal = 0
     for (y in 1 until map.lastIndex) {
         for (x in 1 until map[0].lastIndex) {
