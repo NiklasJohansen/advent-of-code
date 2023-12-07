@@ -14,32 +14,30 @@ fun day7Part1() = readLines("aoc2023/day07.txt")
 
 fun day7Part2() = readLines("aoc2023/day07.txt")
     .parseHands()
-    .getTotalWinnings(hasWildCards = true)
+    .getTotalWinnings(hasJoker = true)
 
 private fun List<String>.parseHands(): List<Hand> =
     this.map { it.trim().split(" ").let { (cards, bid) -> Hand(cards, bid.toInt()) } }
 
-private fun List<Hand>.getTotalWinnings(hasWildCards: Boolean = false) =
-    this.sortedBy { hand -> hand.getStrength(hasWildCards) }
-        .onEachIndexed { rank, hand -> hand.score = hand.bid * (rank + 1L) }
-        .sumOf { it.score }
+private fun List<Hand>.getTotalWinnings(hasJoker: Boolean = false) =
+    this.sortedBy { it.getStrength(hasJoker) }.mapIndexed { rank, hand -> (rank + 1) * hand.bid }.sum()
 
-private fun Hand.getStrength(hasWildCards: Boolean): Long {
-    val cardTypes = if (hasWildCards) CARDS_TYPES_WITH_WILDCARD else CARDS_TYPES
+private fun Hand.getStrength(hasJokers: Boolean): Long {
+    val cardTypes = if (hasJokers) CARDS_TYPES_WITH_JOKER else CARDS_TYPES
     val totalCardStrength = (0 until 5).sumOf { i -> cardTypes.indexOf(cards[i]) * STRENGTH_RANGES[i] }
-    val handTypeStrength = getHandTypeStrength(cards, hasWildCards) * 10_000_000_000
+    val handTypeStrength = getHandTypeStrength(cards, hasJokers) * 10_000_000_000
     return totalCardStrength + handTypeStrength
 }
 
-private fun getHandTypeStrength(cards: String, hasWildCards: Boolean): Int {
-    if (!hasWildCards) return HAND_TYPES.indexOf(getHandType(cards))
+private fun getHandTypeStrength(cards: String, hasJokers: Boolean): Int {
+    if (!hasJokers) return HAND_TYPES.indexOf(getHandType(cards))
     val baseCards = cards.replace("J", "")
-    val numWildcards = cards.count { it == 'J' }
+    val numJokers = cards.count { it == 'J' }
     val numCardTypes = CARDS_TYPES.length.toDouble()
-    val numPermutations = numCardTypes.pow(numWildcards.toDouble()).toInt()
+    val numPermutations = numCardTypes.pow(numJokers.toDouble()).toInt()
     return (0 .. numPermutations).maxOf { i ->
         var wildcards = ""
-        repeat(numWildcards) { j -> wildcards += CARDS_TYPES[(i / numCardTypes.pow(j) % numCardTypes).toInt()] }
+        repeat(numJokers) { j -> wildcards += CARDS_TYPES[(i / numCardTypes.pow(j) % numCardTypes).toInt()] }
         HAND_TYPES.indexOf(getHandType(baseCards + wildcards))
     }
 }
@@ -50,8 +48,8 @@ private fun getHandType(cards: String) =
         .joinToString("") { (_, group) -> group.size.toString() }
 
 private val CARDS_TYPES = "23456789TJQKA"
-private val CARDS_TYPES_WITH_WILDCARD = "J23456789TQKA"
+private val CARDS_TYPES_WITH_JOKER = "J23456789TQKA"
 private val HAND_TYPES = arrayOf("11111", "2111", "221", "311", "32", "41", "5")
 private val STRENGTH_RANGES = arrayOf(100_000_000, 1_000_000, 10_000, 100, 1)
 
-private data class Hand(val cards: String, val bid: Int, var score: Long = 0)
+private data class Hand(val cards: String, val bid: Int)
