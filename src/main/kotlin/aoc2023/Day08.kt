@@ -8,11 +8,11 @@ fun main() {
 }
 
 fun day8Part1() = readLines("aoc2023/day08.txt")
-    .parsMap()
+    .parseMap()
     .let { map -> map.nodes.first { it.label == "AAA" }.getStepsToNodeWithLabelEndingIn("ZZZ", map) }
 
 fun day8Part2() = readLines("aoc2023/day08.txt")
-    .parsMap()
+    .parseMap()
     .let { map -> map.nodes
         .filter { it.label.endsWith("A") }
         .map { it.getStepsToNodeWithLabelEndingIn("Z", map) }
@@ -32,7 +32,7 @@ private fun Node.getStepsToNodeWithLabelEndingIn(value: String, map: Map): Long 
     return steps
 }
 
-private fun List<String>.parsMap(): Map =
+private fun List<String>.parseMap(): Map =
     Map(this[0], this.drop(2).map { line -> line.split(" ", "(", ",", ")").let { Node(it[0], it[3], it[5]) } } )
 
 private fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
