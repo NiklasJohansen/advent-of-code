@@ -4,8 +4,8 @@ import readLines
 import kotlin.math.abs
 
 fun main() {
-    println("D1P1: ${day1Part1()}")
-    println("D1P2: ${day1Part2()}")
+    println("D1P1: ${day1Part1()} = 11")
+    println("D1P2: ${day1Part2()} = 31")
 }
 
 fun day1Part1() = readLines("aoc2024/day01.txt")
