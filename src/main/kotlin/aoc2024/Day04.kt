@@ -9,12 +9,12 @@ fun main() {
 
 fun day4Part1() = readLines("aoc2024/day04.txt")
     .sumOfEachCell { grid, x, y ->
-        directions.sumOf { (dx, dy) -> "XMAS".filterIndexed { i, c -> c == grid[y + dy * i, x + dx * i] }.length / 4 }
+        directions.count { (dx, dy) -> (0..3).all { i -> "XMAS"[i] == grid[y + dy * i, x + dx * i] } }
     }
 
 fun day4Part2() = readLines("aoc2024/day04.txt")
     .sumOfEachCell { grid, x, y ->
-        patterns.count { pattern -> (0 .. 4).all { i -> pattern[i] == grid[(y-1 + i*2 / 3), (x-1 + i*2 % 3)] } }
+        patterns.count { pattern -> (0..4).all { i -> pattern[i] == grid[(y-1 + i*2 / 3), (x-1 + i*2 % 3)] } }
     }
 
 fun List<String>.sumOfEachCell(action: (grid: List<String>, x: Int, y: Int) -> Int) =
