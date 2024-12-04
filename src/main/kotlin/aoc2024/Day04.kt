@@ -14,7 +14,7 @@ fun day4Part1() = readLines("aoc2024/day04.txt")
 
 fun day4Part2() = readLines("aoc2024/day04.txt")
     .sumOfEachCell { grid, x, y ->
-        patterns.count { pattern -> (0 .. 4).all { i -> grid[(y-1 + i*2 / 3), (x-1 + i*2 % 3)] == pattern[i] } }
+        patterns.count { pattern -> (0 .. 4).all { i -> pattern[i] == grid[(y-1 + i*2 / 3), (x-1 + i*2 % 3)] } }
     }
 
 fun List<String>.sumOfEachCell(action: (grid: List<String>, x: Int, y: Int) -> Int) =
