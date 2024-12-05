@@ -2,7 +2,7 @@ package aoc2024
 
 import readLines
 
-typealias Rules  = List<List<Int>>
+typealias Rule = List<Int>
 typealias Update = List<Int>
 
 fun main() {
@@ -19,11 +19,13 @@ fun day5Part2() = readLines("aoc2024/day05.txt", delimiter = "\n\n")
     .let { (rules, updates) -> updates.filter { !it.hasCorrectOrder(rules) }.sumOf { it.fixOrder(rules)[it.size / 2] } }
 
 fun List<String>.parseRulesAndUpdates() = Pair(
-    this[0].split("\n").map { it.split("|").map { it.toInt() } }, // Page ordering rules
-    this[1].split("\n").map { it.split(",").map { it.toInt() } }  // Page updates
+    this[0].split("\n").map { it.split("|").map { it.toInt() } }, // Rules
+    this[1].split("\n").map { it.split(",").map { it.toInt() } }  // Updates
 )
 
-fun Update.hasCorrectOrder(rules: Rules): Boolean =
+fun Update.fixOrder(rules: List<Rule>) = sortedWith { a, b -> if (listOf(a, b).hasCorrectOrder(rules)) -1 else 1 }
+
+fun Update.hasCorrectOrder(rules: List<Rule>): Boolean =
     indices.all { a ->
         indices.all { b ->
             rules.none { (left, right) ->
@@ -32,5 +34,3 @@ fun Update.hasCorrectOrder(rules: Rules): Boolean =
             }
         }
     }
-
-fun Update.fixOrder(rules: List<List<Int>>) = sortedWith { a, b -> if (listOf(a, b).hasCorrectOrder(rules)) -1 else 1 }
