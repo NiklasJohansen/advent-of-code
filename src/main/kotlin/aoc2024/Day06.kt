@@ -17,20 +17,20 @@ fun day6Part2() = readLines("aoc2024/day06.txt")
 
 private fun List<String>.getVisitedSpots(obstruction: Vec? = null): Set<Spot> {
     var pos = findStart()
-    var dir = directions[0]
+    var dir = directions.first()
     val visited = mutableSetOf(Spot(pos, dir))
     while (true) {
-        val cell = getCell(pos + dir, obstruction) ?: return visited // Outside
+        val cell = getCell(pos + dir, obstruction) ?: return visited // Outside map
         if (cell == '#') {
-            dir = directions[(directions.indexOf(dir) + 1) % 4]
+            dir = directions[(directions.indexOf(dir) + 1) % 4] // Turn right
             continue
         }
         pos += dir
-        visited += Spot(pos, dir).takeIf { it !in visited } ?: return emptySet() // Loop
+        visited += Spot(pos, dir).takeIf { it !in visited } ?: return emptySet() // Visited before = loop
     }
 }
 
-private fun List<String>.findStart() = indexOfFirst { it.contains('^') }.let { y -> Vec(this[y].indexOf('^'), y) }
+private fun List<String>.findStart() = indexOfFirst { '^' in it }.let { y -> Vec(this[y].indexOf('^'), y) }
 
 private fun List<String>.getCell(pos: Vec, obstruction: Vec?) = if (pos == obstruction) '#' else getOrNull(pos.y)?.getOrNull(pos.x)
 
